@@ -1,116 +1,482 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111111">
-  <meta name="description" content="SMG Media — portfolio krótkich form wideo, rolek i kreatywnego contentu.">
-  <title>SMG Media — Selected Work</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="SMG Media — portfolio rolek, filmów i kreatywnych realizacji wideo.">
+  <title>SMG Media — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Jasny wygląd strony -->
+  <style>
+    :root {
+      --jasne-tlo: #ffffff;
+      --ciemny-tekst: #171717;
+      --zielony-akcent: #b7f34a;
+      --szare-tlo: #f5f5f2;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--jasne-tlo) !important;
+      color: var(--ciemny-tekst) !important;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .noise {
+      display: none;
+    }
+
+    .site-header {
+      background: rgba(255,255,255,.94) !important;
+      border-bottom: 1px solid #e9e9e9;
+      color: var(--ciemny-tekst) !important;
+    }
+
+    .site-header a,
+    .wordmark,
+    .site-footer,
+    .site-footer a {
+      color: var(--ciemny-tekst) !important;
+    }
+
+    .wordmark {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .wordmark span {
+      color: #78a925;
+    }
+
+    .hero,
+    .work,
+    .services,
+    .contact {
+      color: var(--ciemny-tekst) !important;
+    }
+
+    .hero h1,
+    .section-heading h2,
+    .contact h2,
+    .service-row h3,
+    .video-meta h3 {
+      color: var(--ciemny-tekst) !important;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .hero h1 span,
+    .accent,
+    .contact h2 span,
+    .small-note span {
+      color: #78a925 !important;
+    }
+
+    .hero p,
+    .section-note,
+    .contact-copy,
+    .video-meta p,
+    .site-footer p {
+      color: #666666 !important;
+    }
+
+    .hero-kicker,
+    .eyebrow,
+    .hero-index,
+    .small-note {
+      color: #666666 !important;
+    }
+
+    .live-dot {
+      background: #78a925 !important;
+    }
+
+    .round-link {
+      background: var(--zielony-akcent) !important;
+      color: #171717 !important;
+      border: none !important;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px 20px;
+    }
+
+    .video-card {
+      min-width: 0;
+    }
+
+    .video-open {
+      display: block;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 5px;
+      background: #eeeeea;
+      color: #171717;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .video-open video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #eeeeea;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px;
+      background: #eeeeea;
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .video-placeholder .play-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--zielony-akcent);
+      color: #171717;
+      font-size: 17px;
+    }
+
+    .video-card.video-ready .video-placeholder {
+      display: none;
+    }
+
+    .card-number {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 6px 9px;
+      background: rgba(255,255,255,.9);
+      color: #171717;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .play-button {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--zielony-akcent);
+      color: #171717;
+      font-size: 18px;
+    }
+
+    .video-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+    }
+
+    .video-meta h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .video-meta p {
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    .meta-tag {
+      padding: 5px 7px;
+      border: 1px solid #deded8;
+      border-radius: 3px;
+      font-size: 9px;
+    }
+
+    .service-list {
+      border-top: 1px solid #deded8;
+    }
+
+    .service-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid #deded8;
+    }
+
+    .service-row > span:first-child {
+      color: #78a925;
+      font-size: 12px;
+    }
+
+    .service-row h3 {
+      flex: 1;
+      margin: 0;
+      font-size: clamp(17px, 2vw, 25px);
+    }
+
+    .service-arrow {
+      color: #78a925;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 25px;
+      padding: 14px 20px;
+      background: var(--zielony-akcent);
+      color: #171717 !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .site-footer {
+      border-top: 1px solid #e9e9e9;
+    }
+
+    .video-dialog {
+      width: min(92vw, 440px);
+      max-height: 90vh;
+      padding: 45px 12px 12px;
+      border: 0;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .video-dialog::backdrop {
+      background: rgba(0,0,0,.82);
+    }
+
+    #dialog-video {
+      display: block;
+      width: 100%;
+      max-height: 78vh;
+      background: #111;
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      border: 0;
+      background: transparent;
+      color: #171717;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+      .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-card {
+        max-width: 380px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .site-header nav {
+        gap: 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="noise" aria-hidden="true"></div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="SMG Media — strona główna">SMG<span>®</span></a>
-    <nav aria-label="Główna nawigacja">
-      <a href="#work">Projekty</a>
-      <a href="#services">Oferta</a>
-      <a class="nav-contact" href="#contact">Kontakt <span>↗</span></a>
+    <nav aria-label="Menu główne">
+      <a href="#work">Realizacje</a>
+      <a href="#services">Usługi</a>
+      <a class="nav-contact" href="#contact">Kontakt ↗</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-kicker"><span class="live-dot"></span> CREATIVE STUDIO · SHORT-FORM VIDEO</div>
-      <h1>Content that<br>stops the <span>scroll.</span></h1>
+      <div class="hero-kicker"><span class="live-dot"></span> KREATYWNE STUDIO · FILMY I ROLKI</div>
+      <h1>Treści, które<br>przyciągają <span>uwagę.</span></h1>
       <div class="hero-bottom">
-        <p>Tworzymy wideo, które przyciąga uwagę.<br>Reels, montaż i pomysły na opowieści w ruchu.</p>
-        <a class="round-link" href="#work" aria-label="Zobacz projekty">↓</a>
+        <p>Tworzymy wideo, które zatrzymuje przewijanie.<br>Pomysł, nagranie i montaż w jednym miejscu.</p>
+        <a class="round-link" href="#work" aria-label="Zobacz realizacje">↓</a>
       </div>
-      <div class="hero-index"><span>SMG MEDIA</span><span>CREATIVE WORK / 2026</span></div>
+      <div class="hero-index"><span>SMG MEDIA</span><span>KREATYWNE REALIZACJE</span></div>
     </section>
 
     <section class="work section-wrap" id="work">
       <div class="section-heading">
-        <div><p class="eyebrow">01 / SELECTED WORK</p><h2>Wybrane realizacje<span class="accent">.</span></h2></div>
-        <p class="section-note">Krótkie formy. Mocne historie.<br>Odtwarzaj bezpośrednio na stronie.</p>
+        <div>
+          <p class="eyebrow">01 / NASZE REALIZACJE</p>
+          <h2>Wybrane projekty<span class="accent">.</span></h2>
+        </div>
+        <p class="section-note">29 krótkich form wideo.<br>Kliknij wybraną rolkę, aby ją odtworzyć.</p>
       </div>
+
       <div class="video-grid" id="video-grid">
-        <!--
-          DODAWANIE ROLEK:
-          1. Wgraj plik MP4 do folderu videos.
-          2. Skopiuj poniższy blok article i zmień nazwę pliku, tytuł oraz kategorię.
-          3. Zmień poster="videos/miniatura.jpg", jeśli masz miniaturę.
-        -->
-        <article class="video-card featured">
-          <button class="video-open" type="button" aria-label="Odtwórz rolkę: Project 01">
-            <video class="reel" muted playsinline preload="metadata" poster="">
-              <source src="videos/reel-01.mp4" type="video/mp4">
-            </video>
-            <span class="video-placeholder"><span class="play-icon">▶</span><span>Dodaj plik <b>reel-01.mp4</b> do folderu videos</span></span>
-            <span class="card-number">01</span><span class="play-button" aria-hidden="true">↗</span>
-          </button>
-          <div class="video-meta"><div><h3>Project 01</h3><p>SHORT-FORM VIDEO</p></div><span class="meta-tag">REEL</span></div>
-        </article>
-        <article class="video-card">
-          <button class="video-open" type="button" aria-label="Odtwórz rolkę: Project 02">
-            <video class="reel" muted playsinline preload="metadata" poster=""><source src="videos/reel-02.mp4" type="video/mp4"></video>
-            <span class="video-placeholder"><span class="play-icon">▶</span><span>Dodaj plik <b>reel-02.mp4</b> do folderu videos</span></span>
-            <span class="card-number">02</span><span class="play-button" aria-hidden="true">↗</span>
-          </button>
-          <div class="video-meta"><div><h3>Project 02</h3><p>CREATIVE EDIT</p></div><span class="meta-tag">REEL</span></div>
-        </article>
-        <article class="video-card">
-          <button class="video-open" type="button" aria-label="Odtwórz rolkę: Project 03">
-            <video class="reel" muted playsinline preload="metadata" poster=""><source src="videos/reel-03.mp4" type="video/mp4"></video>
-            <span class="video-placeholder"><span class="play-icon">▶</span><span>Dodaj plik <b>reel-03.mp4</b> do folderu videos</span></span>
-            <span class="card-number">03</span><span class="play-button" aria-hidden="true">↗</span>
-          </button>
-          <div class="video-meta"><div><h3>Project 03</h3><p>BRAND STORY</p></div><span class="meta-tag">REEL</span></div>
-        </article>
-        <article class="video-card">
-          <button class="video-open" type="button" aria-label="Odtwórz rolkę: Project 04">
-            <video class="reel" muted playsinline preload="metadata" poster=""><source src="videos/reel-04.mp4" type="video/mp4"></video>
-            <span class="video-placeholder"><span class="play-icon">▶</span><span>Dodaj plik <b>reel-04.mp4</b> do folderu videos</span></span>
-            <span class="card-number">04</span><span class="play-button" aria-hidden="true">↗</span>
-          </button>
-          <div class="video-meta"><div><h3>Project 04</h3><p>SOCIAL CAMPAIGN</p></div><span class="meta-tag">REEL</span></div>
-        </article>
+        <!-- Karty 29 rolek są generowane poniżej. -->
       </div>
-      <p class="small-note">Portfolio aktualizowane wraz z nowymi realizacjami <span>✳</span></p>
+
+      <p class="small-note">Każda realizacja to osobna historia <span>✳</span></p>
     </section>
 
     <section class="services section-wrap" id="services">
       <div class="section-heading">
-        <div><p class="eyebrow">02 / WHAT WE DO</p><h2>Pomysł. Obraz.<br><span class="muted">Efekt.</span></h2></div>
-        <p class="section-note">Od pierwszego konceptu<br>po finalny montaż.</p>
+        <div>
+          <p class="eyebrow">02 / CO ROBIMY</p>
+          <h2>Pomysł. Obraz.<br><span class="muted">Efekt.</span></h2>
+        </div>
+        <p class="section-note">Od pierwszej koncepcji<br>po gotowy materiał.</p>
       </div>
+
       <div class="service-list">
-        <div class="service-row"><span>01</span><h3>Reels & short-form video</h3><span class="service-arrow">↗</span></div>
+        <div class="service-row"><span>01</span><h3>Rolki i krótkie filmy</h3><span class="service-arrow">↗</span></div>
         <div class="service-row"><span>02</span><h3>Montaż i postprodukcja</h3><span class="service-arrow">↗</span></div>
-        <div class="service-row"><span>03</span><h3>Creative concepts</h3><span class="service-arrow">↗</span></div>
-        <div class="service-row"><span>04</span><h3>Content dla marek</h3><span class="service-arrow">↗</span></div>
+        <div class="service-row"><span>03</span><h3>Pomysły i koncepcje kreatywne</h3><span class="service-arrow">↗</span></div>
+        <div class="service-row"><span>04</span><h3>Materiały wideo dla marek</h3><span class="service-arrow">↗</span></div>
       </div>
     </section>
 
     <section class="contact section-wrap" id="contact">
-      <p class="eyebrow">03 / HAVE A PROJECT?</p>
-      <h2>Zróbmy coś<br><span>dobrego.</span></h2>
-      <p class="contact-copy">Masz pomysł na projekt albo szukasz kreatywnego wsparcia?</p>
-      <!-- Podmień adres e-mail poniżej na swój. -->
+      <p class="eyebrow">03 / MASZ POMYSŁ?</p>
+      <h2>Stwórzmy coś<br><span>dobrego.</span></h2>
+      <p class="contact-copy">Planujesz projekt lub szukasz pomysłu na wideo? Napisz do nas.</p>
+      <!-- Zmień adres e-mail na właściwy adres kontaktowy. -->
       <a class="contact-link" href="mailto:hello@smgmedia.pl">Porozmawiajmy <span>↗</span></a>
     </section>
   </main>
 
-  <footer class="site-footer"><a class="wordmark" href="#top">SMG<span>®</span></a><p>Independent creative studio</p><a href="#top">DO GÓRY ↑</a><span>© <span id="year">2026</span> SMG MEDIA</span></footer>
+  <footer class="site-footer">
+    <a class="wordmark" href="#top">SMG<span>®</span></a>
+    <p>Niezależne studio kreatywne</p>
+    <a href="#top">Wróć na górę ↑</a>
+    <span>© <span id="year">2026</span> SMG MEDIA</span>
+  </footer>
 
-  <dialog class="video-dialog" id="video-dialog" aria-label="Odtwarzacz wideo">
-    <button class="dialog-close" type="button" aria-label="Zamknij wideo">×</button>
+  <dialog class="video-dialog" id="video-dialog" aria-label="Odtwarzacz filmu">
+    <button class="dialog-close" type="button" aria-label="Zamknij film">×</button>
     <video id="dialog-video" controls playsinline></video>
   </dialog>
+
+  <script>
+    const videoGrid = document.getElementById("video-grid");
+
+    const kategorie = [
+      "FILM WIDEO",
+      "MONTAŻ",
+      "KAMPANIA MARKI",
+      "TREŚCI DO MEDIÓW"
+    ];
+
+    for (let i = 1; i <= 29; i++) {
+      const numer = String(i).padStart(2, "0");
+      const karta = document.createElement("article");
+      karta.className = "video-card";
+
+      karta.innerHTML = `
+        <button class="video-open" type="button" aria-label="Odtwórz rolkę numer ${i}">
+          <video class="reel" muted playsinline preload="metadata">
+            <source src="videos/reel-${numer}.mp4" type="video/mp4">
+          </video>
+          <span class="video-placeholder">
+            <span class="play-icon">▶</span>
+            <span>Rolka ${numer}<br>Ładowanie filmu…</span>
+          </span>
+          <span class="card-number">${numer}</span>
+          <span class="play-button" aria-hidden="true">↗</span>
+        </button>
+        <div class="video-meta">
+          <div>
+            <h3>Realizacja ${numer}</h3>
+            <p>${kategorie[(i - 1) % kategorie.length]}</p>
+          </div>
+          <span class="meta-tag">ROLKA</span>
+        </div>
+      `;
+
+      const film = karta.querySelector("video");
+      const przycisk = karta.querySelector(".video-open");
+      const placeholder = karta.querySelector(".video-placeholder");
+
+      film.addEventListener("loadeddata", () => {
+        karta.classList.add("video-ready");
+      });
+
+      film.addEventListener("error", () => {
+        placeholder.innerHTML =
+          `<span class="play-icon">!</span>
+           <span>Nie można odtworzyć filmu.<br>Sprawdź plik reel-${numer}.mp4</span>`;
+        karta.classList.remove("video-ready");
+      });
+
+      przycisk.addEventListener("click", () => {
+        const odtwarzacz = document.getElementById("dialog-video");
+        const okno = document.getElementById("video-dialog");
+        odtwarzacz.src = `videos/reel-${numer}.mp4`;
+        okno.showModal();
+        odtwarzacz.play().catch(() => {});
+      });
+
+      videoGrid.appendChild(karta);
+    }
+
+    const okno = document.getElementById("video-dialog");
+    const odtwarzacz = document.getElementById("dialog-video");
+
+    document.querySelector(".dialog-close").addEventListener("click", () => {
+      odtwarzacz.pause();
+      odtwarzacz.removeAttribute("src");
+      odtwarzacz.load();
+      okno.close();
+    });
+
+    okno.addEventListener("click", (event) => {
+      if (event.target === okno) {
+        odtwarzacz.pause();
+        odtwarzacz.removeAttribute("src");
+        odtwarzacz.load();
+        okno.close();
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
